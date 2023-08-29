@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'fabrica.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Feel free to alter this value to suit your needs.
-        default='sqlite3:///db.sqlite3',
+        default='mysql://root:@localhost:3306/fabricadb',
         conn_max_age=600
     )
 }

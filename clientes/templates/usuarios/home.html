@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Usuarios
+{% endblock title %}
+
+{% block content %}
+    <h2 class='fw-bold'>Listado Usuarios</h2><br>
+    <div class="container">
+        <div class="col-md-12 fluid" align='right'>
+            <a href="{% url 'remisiones:registro' %}" class='btn btn-primary'>
+                Agregar
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </a>
+        </div>
+    </div><br>
+{% if usuarios %}
+    <div class='container'>
+        <table class='table table-striped'>
+            <th>Nombre usuario</th>
+            <th>Rol</th>
+            <th>Eliminar</th>
+            {% for user in usuarios %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{% if user.is_superuser %}
+                        Administrador
+                    {% else %}
+                        Estándar
+                    {% endif %}
+                </td>
+                <td>
+                    <button onclick="abrir_modal_eliminacion('{% url 'clientes:del_user' user.id %}')" class='btn btn-danger'>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" align='center'>
+            <div class="col-md-6" align='left'>
+                {% if clientes.has_previous %}
+                    <div class="">
+                        <a href="?page=1" class='btn btn-primary'>&laquo;Primera</a>
+                        <a href="?page={{ clientes.previous_page_number }} {% if request.GET.search %}&q={{ request.GET.search }}{% endif %}" class='btn btn-primary'>Anterior</a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-6" align='right'>
+                {% if clientes.has_next %}
+                    <div class="">
+                        <a href="?page={{ clientes.next_page_number }} {% if request.GET.search %}&q={{ request.GET.search }}{% endif %}" class='btn btn-primary'>Siguiente</a>
+                        <a href="?page={{ clientes.paginator.num_pages }}" class='btn btn-primary'>Última&raquo;</a>
+                    </div>
+                {% endif %}
+            </div>
+    </div>
+
+{% else %}
+    <h3 class='alert alert-info'>No hay clientes registrados.</h3>
+{% endif %}
+
+    <div class="modal fade" id='eliminacion', role='dialog'>
+
+    </div>
+
+{% endblock content %}
+
+{% block extrajs %}
+    <script type='text/javascript'>
+        var $ = jQuery.noConflict();
+        function abrir_modal_eliminacion(url){
+            $('#eliminacion').load(url, function(){
+                $(this).modal('show');
+            });
+        }
+    </script>
+{% endblock extrajs %}

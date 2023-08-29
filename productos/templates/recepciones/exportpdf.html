@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>Factura</title>
+	<style>
+        * {
+            font-size: 10px;
+            font-family: 'DejaVu Sans', serif;
+        }
+
+        .ticket {
+            margin: 2px;
+        }
+
+        h1 {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        td,
+        th {
+            border-top: 1px solid black;
+            border-collapse: collapse;
+            padding: 2px 0px;
+        }
+
+        .centrado {
+            text-align: center;
+            align-content: center;
+        }
+
+        .ticket {
+            width: 180px;
+            max-width: 180px;
+        }
+
+        * {
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: 3px;
+            margin-right: 0;
+            padding: 0;
+        }
+
+        .ticket {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        .span {
+            border: double;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="ticket" id="factura">
+	<div class="">
+			<div class="" align="right">	
+                <h1 >Comercializadora L.S. S.A.S.</h1>
+                <label >Al Mayor y Al Detal</label> <br>
+                <em>Orlando Medina - Laura Salcedo</em>
+			</div>
+	</div><hr>
+	<div class="">
+			<div class="">
+					<h1>ORDEN RECEPCION #{{ recepcion.id }}</h1>
+			</div>
+			<div class="">	
+					Fecha de Recepcion: {{ recepcion.fecha_recepcion }}
+			</div>
+	</div>
+	<div class="">
+			<div class="" style="text-align: left;">
+                <h1>Datos Proveedor</h1>
+                <strong>Nombre: </strong><span class='span'>{{ recepcion.proveedor_id.nombre|title }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <strong>Correo:  </strong><span class='span'>{{ recepcion.proveedor_id.email }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <strong>Contacto:  </strong><span class='span'>{{ recepcion.proveedor_id.telefono }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <strong>Dirección: </strong><span class='span'>{{ recepcion.proveedor_id.direccion|title }}</span>
+			</div>
+			<div class=" text-right"><hr>
+				<h1>Detalle</h1>
+			</div>
+	</div>
+	<div class="bg-white">
+			<table class="table-stripped">
+				<thead>
+					<tr>
+						<th>Codigo</th>
+                        <th>Producto</th>
+                        <th>Marca</th>
+                        <th>Cantidad</th>
+					</tr>
+				</thead>
+				<tbody>
+                {% for detalle in detalles %}
+				<tr align="center">
+					<td>{{ detalle.producto_id.codigo }}</td>
+                    <td>{{ detalle.producto_id|title }}</td>
+                    <td>{{ detalle.producto_id.marca|title }}</td>
+                    <td>{{ detalle.cantidad }}</td>
+				</tr>
+                {% endfor %}
+                <tr>
+                    <th>Total:</th>
+                    <td></td>
+                    <td></td>
+                    <th class=''> {{ total_c }} </th>
+                </tr>
+				</tbody>
+			</table><br>
+		</div>
+</div><br>
+<footer class="ticket centrado">
+	<em>¡Gracias por preferirnos!</em> 
+</footer>
+</body>
+</html>

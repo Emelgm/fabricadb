@@ -1,0 +1,41 @@
+body {
+    height: 100vh;
+    background: white;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 270px;
+    padding: 20px 15px;
+    background: #1AB26B ;
+}
+
+.sidebar li {
+   height: 50px;
+   background: #1AB26B ;
+   margin-top: 10px; 
+   list-style: none;
+   align-items: center;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color:white;
+}
+
+.medium {
+    position: absolute;
+    width: 68%;
+    left: 320px;
+    top: 50px;
+}
+
+img {
+    border-radius: 10px;
+    box-shadow: 5px 5px 0px #21905C;
+    height: 100px;
+    width: 180px;
+}

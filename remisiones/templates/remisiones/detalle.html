@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Remisiones
+{% endblock title %}
+
+{% block content %}
+<div class='container'>
+    <div class="row">
+        <h2 align='center' class='fw-bold'>Comercializadora L.S. S.A.S.</h2>
+        <div class="col-md-12" align='right'>
+            <a href="{% url 'remisiones:pdf_rem' remision.id %}" class='btn btn-primary'>Generar PDF</a>
+        </div>
+    </div>
+    <div class="row">
+        <h5 class='fw-bold'>Datos de Orden</h5>
+        <div class="col-md-4">
+            <label for="formFileDisabled" class="form-label">Orden N°: </label>
+            <input class="form-control" type="text" id="formFileDisabled" disabled value='{{ remision.codigo }}'>
+        </div>
+        <div class="col-md-4">
+            <label for="formFileDisabled" class="form-label">Fecha Remisión: </label>
+            <input class="form-control" type="text" id="formFileDisabled" disabled value='{{ remision.created|date:"M. d, Y" }}'>
+        </div>
+        <div class="col-md-4">
+            <label for="formFileDisabled" class="form-label">Fecha Despacho: </label>
+            <input class="form-control" type="text" id="formFileDisabled" disabled value='{{ remision.fecha_despacho }}'>
+        </div>
+    </div>
+    <div class="row">
+        <h5 class='fw-bold'>Datos de Cliente</h5>
+        <div class="col-md-4">
+            <label for="formFileDisabled" class="form-label">Recibe: </label>
+            <input class="form-control" type="text" id="formFileDisabled" disabled value='{{ remision.cliente_id.nombre|title }}'>
+        </div>
+        <div class="col-md-4">
+            <label for="formFileDisabled" class="form-label">Domicilio: </label>
+            <input class="form-control" type="text" id="formFileDisabled" disabled value='{{ remision.cliente_id.direccion|title }}'>
+        </div>
+    </div><hr>
+    <h3 align='center' class='fw-bold'>Detalle</h3>
+    <table class='table table-striped'>
+        <th>Código</th>
+        <th>Producto</th>
+        <th>Marca</th>
+        <th>Peso</th>
+        <th>Cantidad</th>
+        {% for detalle in detalles %}
+        <tr>
+            <td>{{ detalle.producto_id.codigo }}</td>
+            <td>{{ detalle.producto_id|title }}</td>
+            <td>{{ detalle.producto_id.marca|title }}</td>
+            <td>{{ detalle.peso|floatformat:2 }} (kg)</td>
+            <td>{{ detalle.cantidad }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <th colspan="3">Total:</th>
+            <td class='fw-bold'> {{ total_p|floatformat:2 }} (kg) </td>
+            <td class='fw-bold'> {{ total_c }} </td>
+        </tr>
+    </table>
+</div>
+{% endblock content %}

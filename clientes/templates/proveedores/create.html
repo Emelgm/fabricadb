@@ -1,0 +1,44 @@
+{% comment %} {% extends 'layout.html' %}
+
+{% block title %}
+    Proveedores
+{% endblock %}
+
+{% block content %}
+<div class="col-md-4">
+    <form action="" method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if error %}
+            <h2>{{ error }}</h2>
+        {% else %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Confirmar</button>
+            <a href="{% url 'clientes:list_proveedores' %}" class='btn btn-secondary'>Cancelar</a>
+        {% endif %}
+    </form>
+</div>
+{% endblock  %} {% endcomment %}
+<div class="modal-dialog modal-lg" role='document'>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class='modal-title'>Agregar Proveedor</h2>
+            <a href="{% url 'clientes:list_proveedores' %}" class='btn btn-secondary' data-dismiss='modal' aria-label='Close'>
+                <span aria-hidden='ture'>&times;</span>
+            </a>
+        </div>
+        <form action="{% url 'clientes:add_proveedor' %}" method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-body">
+            {% if error %}
+                <h2>{{ error }}</h2>
+            {% else %}
+                {{ form.as_p }}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Confirmar</button>
+                <a href="{% url 'clientes:list_proveedores' %}" class='btn btn-secondary'>Cancelar</a>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</div>

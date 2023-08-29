@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Recepción
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 align-self-center"><h3 class="fw-bold">Productos</h3></div>
+    </div>
+    <div class="row">
+        <div class='col-md-8'>
+            <form action="" method='GET'>
+                <div class="col-md-12">
+                    <input type="text" class='from-control' placeholder='Buscar...' name='buscar' value='{{ request.GET.buscar }}'>
+                    <button type='submit' class='btn btn-success'>Buscar</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6">
+            <div class="row" style="padding: 10px 0;">
+                <div class="col-12">
+                    <div class="row">
+                        {% for producto in productos %}
+                        <div class="col-4">
+                            <div class="card" style="height: 10rem; width: 12rem; margin: 5px 0px;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ producto.nombre|title }}</h5>
+                                    <p class="card-text">{{ producto.codigo }}</p>
+                                    <p class="card-text">{{ producto.peso|floatformat:2 }}</p>
+                                    <a href="{% url 'productos:Add' producto.id %}" class="btn btn-primary">Agregar</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            {% include "recepciones/carrito.html" %}
+        </div>
+    </div>
+</div>
+{% endblock %}

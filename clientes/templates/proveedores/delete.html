@@ -1,0 +1,20 @@
+<div class="modal-dialog modal-lg" role='document'>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class='modal-title'>Eliminar Proveedor</h2>
+            <a href="{% url 'clientes:list_proveedores' %}" class='btn btn-secondary' data-dismiss='modal' aria-label='Close'>
+                <span aria-hidden='ture'>&times;</span>
+            </a>
+        </div>
+        <form action="{% url 'clientes:del_proveedor' object.id %}" method='POST'>
+            {% csrf_token %}
+            <div class="modal-body">
+                <h2 class="alert alert-warning">¿Desea eliminar el proveedor <strong>{{ proveedor.nombre|title }}</strong>?</h2>
+            </div>
+            <div class="modal-footer">
+                <button type='submit' class='btn btn-success'>Aceptar</button>
+                <a href="{% url 'clientes:list_proveedores' %}" class='btn btn-secondary'>Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

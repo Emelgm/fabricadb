@@ -1,0 +1,24 @@
+<div class="modal-dialog modal-lg" role='document'>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class='modal-title'>Agregar Recepción</h2>
+            <a href="{% url 'productos:list_recepciones' %}" class='btn btn-secondary' data-dismiss='modal' aria-label='Close'>
+                <span aria-hidden='ture'>&times;</span>
+            </a>
+        </div>
+        <form action="{% url 'productos:add_recepcion' %}" method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-body">
+            {% if error %}
+                <h2>{{ error }}</h2>
+            {% else %}
+                {{ form.as_p }}
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Confirmar</button>
+                <a href="{% url 'productos:list_recepciones' %}" class='btn btn-secondary'>Cancelar</a>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</div>

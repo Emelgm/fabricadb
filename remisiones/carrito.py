@@ -22,7 +22,7 @@ class Carrito:
             }
         else:
             self.carrito[id]['cantidad'] += 1
-            self.carrito[id]['peso'] += round(producto.peso,2)
+            #self.carrito[id]['peso'] += round(producto.peso,2)
         self.guardar_carrito()
     
     def guardar_carrito(self):
@@ -39,7 +39,7 @@ class Carrito:
         id = str(producto.id)
         if id in self.carrito.keys():
             self.carrito[id]['cantidad'] -= 1
-            self.carrito[id]['peso'] -= round(producto.peso,2)
+            #self.carrito[id]['peso'] -= round(producto.peso,2)
             if self.carrito[id]['cantidad'] <= 0: self.eliminar(producto)
             self.guardar_carrito()
 

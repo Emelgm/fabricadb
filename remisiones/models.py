@@ -25,17 +25,17 @@ class Remisiones(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        # time = timezone.now().strftime('%H%M%S')
-        count = Remisiones.objects.all().count()
-        key = Remisiones.objects.order_by('id').last().id
-        if count > 0:
-            new_id = 'D' + str(key+1).zfill(3)
-        else:
-            new_id = 'D' + str(1).zfill(3)
+    # def make_id(*args, **kwargs):
+    #     # time = timezone.now().strftime('%H%M%S')
+    #     count = Remisiones.objects.all().count()
+    #     key = Remisiones.objects.order_by('id').last().id
+    #     if count > 0:
+    #         new_id = 'D' + str(key+1).zfill(3)
+    #     else:
+    #         new_id = 'D' + str(1).zfill(3)
         
-        self.codigo = str(new_id)
-        super().save(*args, **kwargs)
+    #     codigo = str(new_id)
+    #     return codigo
     
     def __str__(self):
         return self.codigo

@@ -14,12 +14,19 @@ class CreateUserForm(UserCreationForm):
 class RemisionForm(forms.ModelForm):
     class Meta:
         model = Remisiones
-        fields = ['fecha_despacho', 'cliente_id']
+        fields = ['codigo', 'fecha_despacho', 'cliente_id']
         labels = {
+            'codigo': 'Código',
             'fecha_despacho': 'Fecha de Despacho',
             'cliente_id': 'ID Cliente',
         }
         widgets = {
+            'codigo': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese el código de despacho'
+                }
+            ),
             'fecha_despacho': forms.DateInput(
                 format=('%Y-%m-%d'),
                 attrs={

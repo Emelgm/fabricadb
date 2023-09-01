@@ -115,18 +115,18 @@
     <div class="row">
         <div class="col-md-12" align='center'>
             <div class="col-md-6" align='left'>
-                {% if productos.has_previous %}
+                {% if remisiones.has_previous %}
                     <div class="">
                         <a href="?page=1" class='btn btn-primary'>&laquo;Primera</a>
-                        <a href="?page={{ productos.previous_page_number }} {% if request.GET.search %}&q={{ request.GET.search }}{% endif %}" class='btn btn-primary'>Anterior</a>
+                        <a href="?page={{ remisiones.previous_page_number }} {% if request.GET.search %}&q={{ request.GET.search }}{% endif %}" class='btn btn-primary'>Anterior</a>
                     </div>
                 {% endif %}
             </div>
             <div class="col-md-6" align='right'>
-                {% if productos.has_next %}
+                {% if remisiones.has_next %}
                     <div class="">
-                        <a href="?page={{ productos.next_page_number }} {% if request.GET.search %}&q={{ request.GET.search }}{% endif %}" class='btn btn-primary'>Siguiente</a>
-                        <a href="?page={{ productos.paginator.num_pages }}" class='btn btn-primary'>Última&raquo;</a>
+                        <a href="?page={{ remisiones.next_page_number }} {% if request.GET.search %}&q={{ request.GET.search }}{% endif %}" class='btn btn-primary'>Siguiente</a>
+                        <a href="?page={{ remisiones.paginator.num_pages }}" class='btn btn-primary'>Última&raquo;</a>
                     </div>
                 {% endif %}
             </div>

@@ -27,8 +27,9 @@ class Remisiones(models.Model):
 
     def save(self, *args, **kwargs):
         # time = timezone.now().strftime('%H%M%S')
-        key = Remisiones.objects.all().count()
-        if key > 0:
+        count = Remisiones.objects.all().count()
+        key = Remisiones.objects.order_by('id').last().id
+        if count > 0:
             new_id = 'D' + str(key+1).zfill(3)
         else:
             new_id = 'D' + str(1).zfill(3)

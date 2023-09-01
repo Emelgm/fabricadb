@@ -8,6 +8,7 @@ urlpatterns = [
     path('agregar_producto/', login_required(CrearProducto.as_view()), name='add_producto'),
     path('editar_producto/<int:pk>/', login_required(ActualizarProducto.as_view()), name='edit_producto'),
     path('<int:pk>/', login_required(EliminarProducto.as_view()), name='del_producto'),
+    path('stock/', stock_pdf, name='stock'),
     # recepciones
     path('recepciones/', listar_recepciones, name='list_recepciones'),
     path('agregar_recepcion/', agregar_recepcion, name='add_recepcion'),

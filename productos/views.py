@@ -127,6 +127,21 @@ def export_pdf(request, pk):
     return HttpResponse(pdf, content_type='application/pdf')
 
 
+def stock_pdf(request):
+    productos = Producto.objects.filter(estado=True).order_by('codigo')
+    total_c = 0
+    total_p = productos.count()
+    for i in productos:
+        total_c += i.cantidad
+    context = {
+        'productos': productos,
+        'total_c': total_c,
+        'total_p': total_p
+    }
+    pdf = render_to_pdf('productos/stock.html', context)
+    return HttpResponse(pdf, content_type='application/pdf')
+
+
 @login_required(login_url='remisiones:login')
 def recepcionar(request, pk):
     obj = get_object_or_404(Recepcion, id=pk)

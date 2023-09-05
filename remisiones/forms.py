@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from datetime import date
+from django.utils import timezone
 from productos.models import RemiProd
 from .models import Remisiones
 
@@ -14,19 +15,19 @@ class CreateUserForm(UserCreationForm):
 class RemisionForm(forms.ModelForm):
     class Meta:
         model = Remisiones
-        fields = ['codigo', 'fecha_despacho', 'cliente_id']
+        fields = ['fecha_despacho', 'cliente_id']
         labels = {
-            'codigo': 'Código',
+            # 'codigo': 'Código',
             'fecha_despacho': 'Fecha de Despacho',
             'cliente_id': 'ID Cliente',
         }
         widgets = {
-            'codigo': forms.TextInput(
-                attrs = {
-                    'class': 'form-control',
-                    'placeholder': 'Ingrese el código de despacho'
-                }
-            ),
+            # 'codigo': forms.TextInput(
+            #     attrs = {
+            #         'class': 'form-control',
+            #         'placeholder': ''
+            #     }
+            # ),
             'fecha_despacho': forms.DateInput(
                 format=('%Y-%m-%d'),
                 attrs={

@@ -1,106 +1,50 @@
-{% comment %} <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Orden - Despacho</title>
-    <style type="text/css">
-
-        table {
-            text-align: center;
-        }
-
-        div.b {
-            width: 50%;
-            padding: 5px;
-            float: left; 
-        }
-        h1 {
-            padding: 0px;
-            margin: 0px;
-        }
-
-        div.c {
-            display: inline-block;
-            width: 100%;
-            padding: 5px;
-          }
-
-    </style>
-</head>
-<body>
-
-    <div class=''>
-        <div class="c">
-            <h1 >Comercializadora L.S. S.A.S.</h1>
-            <label >Al Mayor y Al Detal</label> <br>
-            <em>Orlando Medina - Laura Salcedo</em>
-        </div><hr>
-        <div class='c' >
-            <div class='b'>
-                <h1>Datos de Orden</h1>
-                Orden N#: {{ remision.codigo }} <br>
-                Fecha Remision: {{ remision.created|date:"M. d, Y" }} <br>
-                Fecha Despacho: {{ remision.fecha_despacho }} <br>
-            </div>
-            <div class='b'>
-                <h1>Datos de Cliente</h1>
-                Recibe: {{ remision.cliente_id.nombre|title }}<br>
-                Domicilio: {{ remision.cliente_id.direccion|title }}
-            </div>
-        </div><hr>
-    </div>
-    <div class='c'>
-        <h1 align='center'>Detalle</h1><hr>
-        <table class=''>
-            <th>Codigo</th>
-            <th>Producto</th>
-            <th>Marca</th>
-            <th>Peso</th>
-            <th>Cantidad</th>
-            {% for detalle in detalles %}
-            <tr>
-                <td>{{ detalle.producto_id.codigo }}</td>
-                <td>{{ detalle.producto_id|title }}</td>
-                <td>{{ detalle.producto_id.marca|title }}</td>
-                <td>{{ detalle.peso|floatformat:2 }} (kg)</td>
-                <td>{{ detalle.cantidad }}</td>
-            </tr>
-            {% endfor %}
-            <tr>
-                <th>Total:</th>
-                <td></td>
-                <td></td>
-                <th class=''> {{ total_p|floatformat:2 }} (kg) </th>
-                <th class=''> {{ total_c }} </th>
-            </tr>
-        </table>
-    </div>
-</body>
-</html> {% endcomment %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Factura</title>
-	<style>
+	<style media="print">
+
+        .ticket {
+            width: 10%;
+            max-width: 20px;
+            margin: 5px;
+            padding: 0px;
+            text-align: center;
+            margin-left: 0;
+        }
+
+        body{
+            margin: -22px;
+            width: 10%;
+        }
+
+        
         * {
             font-size: 10px;
             font-family: 'DejaVu Sans', serif;
-        }
-
-        .ticket {
-            margin: 2px;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            margin-right: 0;
+            padding: 0;
         }
 
         h1 {
-            padding: 0px;
-            margin: 0px;
+            padding: 0;
+            margin: 2px;
+        }
+
+        .table{
+            margin-left: -20px;
         }
 
         td,
         th {
+            margin-left: -25px;
             border-top: 1px solid black;
             border-collapse: collapse;
-            padding: 2px 0px;
+            padding: 1px 0px;
         }
 
         .centrado {
@@ -108,44 +52,24 @@
             align-content: center;
         }
 
-        .ticket {
-            width: 180px;
-            max-width: 180px;
-        }
-
-        * {
-            margin-top: 0;
-            margin-bottom: 0;
-            margin-left: 3px;
-            margin-right: 0;
-            padding: 0;
-        }
-
-        .ticket {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            text-align: center;
-        }
-
         .span {
             border: double;
-            padding: 5px;
+            padding: 2px;
         }
+
+
     </style>
 </head>
 <body>
-<div class="ticket" id="factura">
+<div class="ticket">
 	<div class="">
-			<div class="" align="right">	
+			<div class="" align="left">	
                 <h1 >Comercializadora L.S. S.A.S.</h1>
-                <label >Al Mayor y Al Detal</label> <br>
+                <label >NIT: 901.526.971-3</label><br>
                 <em>Orlando Medina - Laura Salcedo</em>
 			</div>
-	</div><hr>
-	<div class="">
+	</div>
+	<div class="" align="left">
 			<div class="">
 					<h1>ORDEN DESPACHO #{{ remision.codigo }}</h1>
 			</div>
@@ -156,48 +80,43 @@
 	<div class="">
 			<div class="" style="text-align: left;">
                 <h1>Datos Cliente</h1>
-                <strong>Nombre: </strong><span class='span'>{{ remision.cliente_id.nombre|title }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <strong>Código:  </strong><span class='span'>{{ remision.cliente_id.codigo }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <strong>Contacto:  </strong><span class='span'>{{ remision.cliente_id.telefono }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <strong>Código:  </strong><span class='span'>{{ remision.cliente_id.codigo }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                <strong>Nombre: </strong><span class='span'>{{ remision.cliente_id.nombre|title }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+                <strong>Contacto:  </strong><span class='span'>{{ remision.cliente_id.telefono }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
                 <strong>Dirección: </strong><span class='span'>{{ remision.cliente_id.direccion|title }}</span>
 			</div>
-			<div class=" text-right"><hr>
+			<div class="" align="left">
 				<h1>Detalle</h1>
 			</div>
-	</div>
-	<div class="bg-white">
-			<table class="table-stripped">
-				<thead>
-					<tr>
-						<th>Codigo</th>
+            <table class="table" width="28%">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
                         <th>Producto</th>
                         <th>Marca</th>
-                        <th>Peso</th>
                         <th>Cantidad</th>
-					</tr>
-				</thead>
-				<tbody>
+                    </tr>
+                </thead>
+                <tbody>
                 {% for detalle in detalles %}
-				<tr align="center">
-					<td>{{ detalle.producto_id.codigo }}</td>
+                <tr align="center">
+                    <td>{{ detalle.producto_id.codigo }}</td>
                     <td>{{ detalle.producto_id|title }}</td>
                     <td>{{ detalle.producto_id.marca|title }}</td>
-                    <td>{{ detalle.peso|floatformat:2 }} (kg)</td>
                     <td>{{ detalle.cantidad }}</td>
-				</tr>
+                </tr>
                 {% endfor %}
                 <tr>
                     <th>Total:</th>
                     <td></td>
                     <td></td>
-                    <td></td>
                     <th class=''> {{ total_c }} </th>
                 </tr>
-				</tbody>
-			</table><br>
-		</div>
-</div><br>
-<footer class="ticket centrado">
+                </tbody>
+            </table><br>
+	</div>
+</div>
+<footer class="">
 	<em>¡Gracias por preferirnos!</em> 
 </footer>
 </body>

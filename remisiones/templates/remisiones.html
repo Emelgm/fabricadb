@@ -12,7 +12,7 @@
     </div>
     <div class="row">
         <div class='col-md-8'>
-            <form action="" method='GET'>
+            <form action="{% url "remisiones:rem" %}" method='GET'>
                 <div class="col-md-12">
                     <input type="text" class='from-control' placeholder='Buscar...' name='buscar' value='{{ request.GET.buscar }}'>
                     <button type='submit' class='btn btn-success'>Buscar</button>
@@ -29,7 +29,6 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ producto.nombre|title }}</h5>
                                     <p class="card-text">{{ producto.codigo }}</p>
-                                    <p class="card-text">{{ producto.peso|floatformat:2 }}</p>
                                     <a href="{% url 'remisiones:Add' producto.id %}" class="btn btn-primary">Agregar</a>
                                 </div>
                             </div>

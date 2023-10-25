@@ -3,5 +3,5 @@ def total_carrito(request):
     if request.user.is_authenticated:
         if 'carrito' in request.session.keys():
             for key, value in request.session['carrito'].items():
-                total += float(value['peso'])
-    return {'total_carrito': round(total,2)}
+                total += int(value['cantidad'])
+    return {'total_carrito': total}

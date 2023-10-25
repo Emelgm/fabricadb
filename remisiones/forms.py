@@ -36,18 +36,30 @@ class RemisionForm(forms.ModelForm):
                     'value': date.today()
                 }
             ),
-            'cliente_id': forms.Select(
+            'cliente_id': forms.TextInput(
                 attrs = {
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'placeholder': 'Ingrese el código del Cliente'
                 }
             ),
         }
+    
+    # def clean(self):
+    #     try:
+    #         sc = Remisiones.objects.get(
+    #             cliente_id=self.cleaned_data["cliente_id"]
+    #         )
+    #         if not sc.exists():
+    #             raise forms.ValidationError('Registro no existe')
+    #     except Remisiones.DoesNotExist:
+    #         pass
+    #     return self.cleaned_data
 
 
 class CarritoForm(forms.ModelForm):
     class Meta:
         model = RemiProd
-        fields = ['cantidad', 'peso', 'remision_id', 'producto_id']
+        fields = ['cantidad', 'remision_id', 'producto_id']
 
 
 class DespacharForm(forms.ModelForm):

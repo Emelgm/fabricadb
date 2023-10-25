@@ -130,9 +130,9 @@
 		//Query All input fields
 		var form_fields = document.getElementsByTagName('input')
 		form_fields[1].placeholder='Usuario...';
-		form_fields[2].placeholder='Correo electrónico...';
-		form_fields[3].placeholder='Contraseña...';
-		form_fields[4].placeholder='Repetir contraseña...';
+		{% comment %} form_fields[2].placeholder='Correo electrónico...'; {% endcomment %}
+		form_fields[2].placeholder='Contraseña...';
+		form_fields[3].placeholder='Repetir contraseña...';
 
 
 		for (var field in form_fields){	

@@ -80,8 +80,11 @@ def listar_recepciones(request):
 @login_required(login_url='remisiones:login')
 def agregar_recepcion(request):
     if request.user.is_superuser:
+        limpiar_carrito(request)
         context = {}
         form = RecepcionForm(request.POST or None)
+        if form.errors:
+            return render(request, '404.html')
         if form.is_valid():
             form.save()
             return recepciones(request)

@@ -30,6 +30,7 @@
 {% if proveedores %}
     <div class='container'>
         <table class='table table-striped'>
+            <th>Código</th>
             <th>Nombre</th>
             <th>Email</th>
             <th>Teléfono</th>
@@ -38,6 +39,7 @@
             <th>Eliminar</th>
             {% for proveedor in proveedores %}
             <tr>
+                <td>{{ proveedor.id }}</td>
                 <td>{{ proveedor.nombre|title }}</td>
                 <td>{{ proveedor.email }}</td>
                 <td>{{ proveedor.telefono }}</td>

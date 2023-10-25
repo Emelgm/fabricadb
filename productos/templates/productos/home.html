@@ -52,7 +52,6 @@
             <th>Nombre</th>
             <th>Marca</th>
             <th>Cantidad</th>
-            <th>Peso (kg)</th>
             <th>Editar</th>
             <th>Eliminar</th>
             {% for producto in productos %}
@@ -61,7 +60,6 @@
                 <td>{{ producto.nombre|title }}</td>
                 <td>{{ producto.marca|title }}</td>
                 <td>{{ producto.cantidad }}</td>
-                <td>{{ producto.peso|floatformat:2 }} (kg)</td>
                 <td>
                     <button onclick="abrir_modal_edicion('{% url 'productos:edit_producto' producto.id %}')" class='btn btn-primary'>
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

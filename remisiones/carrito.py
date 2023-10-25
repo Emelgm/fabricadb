@@ -18,10 +18,10 @@ class Carrito:
                 'nombre': producto.nombre,
                 'marca': producto.marca,
                 'cantidad': 1,
-                'peso': round(producto.peso,2)
+                # 'peso': round(producto.peso,2)
             }
         else:
-            self.carrito[id]['cantidad'] += 1
+            self.carrito[id]['cantidad'] += 3
             #self.carrito[id]['peso'] += round(producto.peso,2)
         self.guardar_carrito()
     

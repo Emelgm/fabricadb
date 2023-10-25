@@ -13,7 +13,7 @@ class UpperField(models.CharField):
 
 
 class Cliente(models.Model):
-    codigo = UpperField(max_length=10, unique=True, null=True, blank=True)
+    codigo = UpperField(max_length=10, primary_key=True)
     nombre = LowerField(max_length=50, null=True, blank=True)
     telefono = models.CharField(max_length=10, null=True, blank=True)
     direccion = LowerField(max_length=150, null=True, blank=True)

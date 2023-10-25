@@ -2,11 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import View
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.utils import timezone
+# from django.shortcuts import render_to_response
+# from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from productos.models import Producto, RemiProd
@@ -14,6 +15,17 @@ from .carrito import Carrito
 from .models import Remisiones
 from .forms import RemisionForm, CreateUserForm
 from .utils import render_to_pdf
+
+
+# ##### error 404
+# def handler_404(request, *args, **kwargs):
+#     response = render_to_response(
+#         '404.html',
+#         {},
+#         context_instance=RequestContext(request)
+#     )
+#     response.status_code = 404
+#     return response
 
 ############## Login
 def registro(request):
@@ -79,9 +91,12 @@ def listar_remisiones(request):
 @login_required(login_url='remisiones:login')
 def agregar_remision(request):
     if request.user.is_superuser:
+        limpiar_carrito(request)
         context = {}
         form = RemisionForm(request.POST or None)
-        if form.is_valid():
+        if form.errors:
+            return render(request, '404.html')
+        elif form.is_valid():
             form.save()
             return remisiones(request)
         context['form'] = form
@@ -123,15 +138,12 @@ def eliminar_remision(request, remision_id):
 def detalle(request, pk):
     remision = Remisiones.objects.get(id=pk)
     detail = RemiProd.objects.filter(remision_id=pk)
-    total_p = 0
     total_c = 0
     for i in detail:
-        total_p += i.peso
         total_c += i.cantidad
     context = {
         'detalles': detail,
         'remision': remision,
-        'total_p': total_p,
         'total_c': total_c
     }
     return render(request, 'remisiones/detalle.html', context)
@@ -142,12 +154,10 @@ def export_pdf(request, pk):
     total_p = 0
     total_c = 0
     for i in detail:
-        total_p += i.peso
         total_c += i.cantidad
     context = {
         'detalles': detail,
         'remision': remision,
-        'total_p': total_p,
         'total_c': total_c
     }
     pdf = render_to_pdf('remisiones/exportpdf.html', context)
@@ -227,7 +237,6 @@ def save_carrito(request):
             producto_id = Producto.objects.get(id=i['producto_id'])
             pedido = RemiProd(
                 cantidad = int(i['cantidad']),
-                peso = float(i['peso']),
                 remision_id = remidion_id,
                 producto_id = producto_id
             )

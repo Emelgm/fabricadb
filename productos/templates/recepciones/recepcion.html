@@ -28,7 +28,6 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ producto.nombre|title }}</h5>
                                     <p class="card-text">{{ producto.codigo }}</p>
-                                    <p class="card-text">{{ producto.peso|floatformat:2 }}</p>
                                     <a href="{% url 'productos:Add' producto.id %}" class="btn btn-primary">Agregar</a>
                                 </div>
                             </div>

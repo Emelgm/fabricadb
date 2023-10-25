@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Error
+{% endblock title %}
+
+{% block nav %}
+<ul class="nav nav-tabs justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'remisiones:list_remisiones' %}">Despachos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'productos:list_recepciones' %}">Recepciones</a>
+    </li>
+  </ul>
+{% endblock nav %}
+{% block content %}
+    <div class="container" align='center'>
+        <br>
+        <h1>UPS!!!</h1><br>
+        <h2>Error por código incorrecto, por favor ingresa un código válido</h2>
+    </div><br>
+    <div class='container' align='center'>
+        <a href="{% url "remisiones:list_remisiones" %}" class='btn btn-secondary'>Volver atrás</a>
+    </div>
+{% endblock content %}

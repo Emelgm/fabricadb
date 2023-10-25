@@ -21,7 +21,6 @@ class Producto(models.Model):
     nombre = LowerField(max_length=150, null=False, blank=False)
     marca = LowerField(max_length=150, null=True, blank=True)
     cantidad = models.IntegerField()
-    peso = models.FloatField()
     estado = models.BooleanField(default=True)
 
     def __str__(self):
@@ -30,7 +29,6 @@ class Producto(models.Model):
 
 class RemiProd(models.Model):
     cantidad = models.IntegerField()
-    peso = models.FloatField()
     remision_id = models.ForeignKey(Remisiones, on_delete=models.CASCADE)
     producto_id = models.ForeignKey(Producto, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)

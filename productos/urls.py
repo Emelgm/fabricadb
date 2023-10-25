@@ -15,7 +15,7 @@ urlpatterns = [
     path('eliminar_recepcion/<int:pk>/', login_required(EliminarRecepcion.as_view()), name='del_recepcion'),
     path('recepcion/<int:pk>/', recepcionar, name='recepcionar'),
     path('detalle_recepcion/<int:pk>', detalle, name='detail_recepcion'),
-    path('pdf_recepciones/<int:pk>', export_pdf, name='pdf_recep'),
+    path('pdf_recepciones/recepcion_<int:pk>', export_pdf, name='pdf_recep'),
     # carrito
     path('recepcion/', recepciones, name='recep'),
     path('add_recepcion/<int:producto_id>/', agregar_producto, name='Add'),

@@ -43,20 +43,17 @@
         <th>Código</th>
         <th>Producto</th>
         <th>Marca</th>
-        <th>Peso</th>
         <th>Cantidad</th>
         {% for detalle in detalles %}
         <tr>
             <td>{{ detalle.producto_id.codigo }}</td>
             <td>{{ detalle.producto_id|title }}</td>
             <td>{{ detalle.producto_id.marca|title }}</td>
-            <td>{{ detalle.peso|floatformat:2 }} (kg)</td>
             <td>{{ detalle.cantidad }}</td>
         </tr>
         {% endfor %}
         <tr>
             <th colspan="3">Total:</th>
-            <td></td>
             <td class='fw-bold'> {{ total_c }} </td>
         </tr>
     </table>

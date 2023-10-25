@@ -6,7 +6,7 @@
                 <span aria-hidden='ture'>&times;</span>
             </a>
         </div>
-        <form action="{% url 'clientes:del_cliente' object.id %}" method='POST'>
+        <form action="{% url 'clientes:del_cliente' object.codigo %}" method='POST'>
             {% csrf_token %}
             <div class="modal-body">
                 <h2 class="alert alert-warning">¿Desea eliminar el cliente <strong>{{ cliente.nombre|title }}</strong>?</h2>

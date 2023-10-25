@@ -21,7 +21,7 @@ class Carrito:
                 # 'peso': round(producto.peso,2)
             }
         else:
-            self.carrito[id]['cantidad'] += 3
+            self.carrito[id]['cantidad'] += 10
             #self.carrito[id]['peso'] += round(producto.peso,2)
         self.guardar_carrito()
     
